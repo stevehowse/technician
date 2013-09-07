@@ -1,0 +1,89 @@
+
+<% i=2%>
+<%j=5%>
+<%y=5%>
+<div style=" display: block; page-break-before: always;">
+</div> 
+<%(1..y).each do |d|%>
+<p>
+<b>Week Beginning:</b> <%=@weekbg.date%>
+</p>
+<div style="margin-bottom:20px;">
+<table>
+<tr>
+<td id="timereqsmall">
+Rooms
+</td>
+<%(1..y).each do |p|%>
+<td id="timereq">
+<%if d==1%>
+Monday <%=p%>
+<%end%>
+<%if d==2%>
+Tuesday <%=p%>
+<%end%>
+<%if d==3%>
+Wednesday <%=p%>
+<%end%>
+<%if d==4%>
+Thursday <%=p%>
+<%end%>
+<%if d==5%>
+Friday <%=p%>
+<%end%>
+</td>
+<%end%>
+</tr>
+<% @rooms.each do |room|%>
+<tr>
+<td id="timereqsmall">
+<%= room.roomname %>
+</td>
+
+<%(1..y).each do |p|%>
+<td id="timereq">
+
+
+
+<% if Content.where("day =?",d).where("period= ?",p).where("room_id =?",room.id).where("weekbg_id = ?", @weekbg.id).first.nil?%>
+<%else%>
+<%@content = Content.where("day =?",d).where("period= ?",p).where("room_id =?",room.id).where("weekbg_id = ?", @weekbg.id).first%>
+<% if @content.created_at.to_datetime < @weekbg.date.to_date-4.days-10.hours && @content.updated_at.to_datetime < @weekbg.date.to_date-4.days-10.hours%>
+<p style="font-size:11px; color:#1D5C08;">
+<% else if @content.created_at.to_datetime < @weekbg.date.to_date-4.days-10.hours && @content.updated_at.to_datetime > @weekbg.date.to_date-4.days-10.hours%>
+<p style="font-size:11px; color:#FFCB1F;">
+<%end%>
+<%end%>
+
+
+<% if @content.created_at.to_datetime > @weekbg.date.to_date-4.days-10.hours %>
+<p style="font-size:11px; color:#FF0000;">
+<%end%>
+
+<% if Schoolclass.where("id =?", @content.schoolclass_id).first.nil?%>
+<%else%>
+<b>Class: </b><%=Schoolclass.where("id =?", @content.schoolclass_id).first.classname%>
+<%end%>
+
+<br />
+<% if User.where("id =?",@content.user_id).first.nil?%>
+<%else%>
+<b>Teacher: </b><%= User.where("id =?",@content.user_id).first.forename %>
+<%= User.where("id =?",@content.user_id).first.name %>
+<%end%>
+<% if @content.pupilnumber.nil? %>
+<%else%>
+<b>Number of Pupils: </b><%=@content.pupilnumber%>
+<%end%>
+<b>Requisition: </b><%=@content.content%>
+<%end%>
+</p>
+</td>
+<%end %>
+</tr>
+<%end %>
+</table>
+</div>
+<div style=" display: block; page-break-before: always;">
+</div>
+<%end %>

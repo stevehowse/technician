@@ -1,0 +1,33 @@
+<h1>Timetable</h1>
+
+<table>
+<tr>
+
+<td>
+<%= fields_for "timetable[]", y do |f| %>
+    <%= f.hidden_field :user_id, :value=>current_user.id %>
+    <%= f.hidden_field :week, :value=>j %>
+    <%= f.hidden_field :day, :value=>y %>
+    <% f.hidden_field :period, :value=>i %>
+    <%= f.label :room_id %>
+	</td>
+	<td>
+    <%= f.collection_select(:room_id, @rooms,:id, :roomname) %>
+	</td>
+</tr>
+<tr>
+<td>
+<%= f.label :schoolclass_id %>
+</td>
+<td> 
+<%= f.collection_select(:schoolclass_id, @schoolclasses, :id, :classname) %>
+</td></tr>
+<tr><td>
+  <%= f.label 'Pupils' %>
+</td>
+<td>
+<%= f.select(:pupilnumber, 1..35, {:prompt => "N/A"})	 %>
+</td>
+</tr>
+</table>
+<%end%>

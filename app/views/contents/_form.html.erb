@@ -1,0 +1,58 @@
+<%= form_for(@content) do |f| %>
+  <% if @content.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@content.errors.count, "error") %> prohibited this content from being saved:</h2>
+
+      <ul>
+      <% @content.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%=f.hidden_field :weekbg_id, :value=>@weekbg.id%>
+<%=f.hidden_field :day, :value=>@day%>
+<%=f.hidden_field :period, :value=>@period%>
+<%=f.hidden_field :week, :value=>@week%>
+<%=f.hidden_field :schoolclass_id, :value=>@schoolclass%>
+<%=f.hidden_field :pupilnumber, :value=>@pupilnumber%>
+ <div>
+ <%=@weekbg.date%>
+ </div>
+ 
+ <div>
+ Week <%=@week%>
+ </div>
+ <div>
+ <%if @day=='1'%>
+ Monday 
+ <% end%>
+ <%if @day=='2'%>
+ Tuesday
+ <% end%>
+ <%if @day=='3'%>
+ Wednesday
+ <% end%>
+ <%if @day=='4'%>
+ Thursday
+ <% end%>
+ <%if @day=='5'%>
+ Friday
+ <% end%>
+ </div>
+ <div>
+ Period <%=@period%>
+ </div>
+  <div class="field">
+    <%= f.label :room_id %><br />
+    <%= f.collection_select(:room_id, Room.all,:id ,:roomname, :selected =>@room) %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br />
+    <%= f.text_area :content %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

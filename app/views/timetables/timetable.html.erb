@@ -1,0 +1,60 @@
+<h1>Timetable</h1>
+
+<%= form_for :timetables, :url => update_all_path, :html => { :method => :put } do %>
+<%y=5%>
+<%x=@periods.periods%>
+<%j=@periods.weeks %>
+<table>
+<% (1..j).each do |j| %>
+<tr>
+<td>
+<h2>Week <%=j%></h2>
+<table >
+<% (1..x).each do |i| %>
+<tr>
+<% (1..y).each do |y| %>
+<td style="border: 2px solid #000000">
+
+<table>
+<tr>
+
+<td>
+<%= fields_for "timetable[]", y do |f| %>
+    <%= f.hidden_field :user_id, :value=>current_user.id %>
+    <%= f.hidden_field :week, :value=>j %>
+    <%= f.hidden_field :day, :value=>y %>
+    <% f.hidden_field :period, :value=>i %>
+    <%= f.label :room_id %>
+	</td>
+	<td>
+    <%= f.collection_select(:room_id, Room.all,:id, :roomname) %>
+	</td>
+</tr>
+<tr>
+<td>
+<%= f.label :schoolclass_id %>
+</td>
+<td> 
+<%= f.collection_select(:schoolclass_id, @schoolclasses, :id, :classname) %>
+</td></tr>
+<tr><td>
+  <%= f.label 'Pupils' %>
+</td>
+<td>
+<%= f.select(:pupilnumber, 1..35, {:prompt => "N/A"})	 %>
+</td>
+</tr>
+</table>
+ </td>
+  <% end %>
+</tr>
+
+<% end %>
+</table>
+<td>
+<tr>
+<% end %>
+<% end %>
+</table>
+      <%= f.submit "Save Timetable", class: "btn btn-large btn-primary" %>
+<% end %>

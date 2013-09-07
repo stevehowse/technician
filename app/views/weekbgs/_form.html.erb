@@ -1,0 +1,21 @@
+<%= form_for(@weekbg) do |f| %>
+  <% if @weekbg.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@weekbg.errors.count, "error") %> prohibited this weekbg from being saved:</h2>
+
+      <ul>
+      <% @weekbg.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :date %><br />
+    <%= f.date_select :date, order:[:day, :month, :year] %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

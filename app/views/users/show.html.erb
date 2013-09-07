@@ -1,0 +1,55 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+	  <%= @user.forename %>
+        <%= @user.name %>
+      </h1>
+    </section>
+<%=@periods.schoolname %>
+	</div>
+<br />
+<% if @user.teacher?%>
+<%= link_to( 'Edit Timetable', user_timetable_path(:week=>'1'))%>
+<br/> <br/>
+<%= link_to( 'Add Requisition', new_userreq_path)%>
+<br/> <br/>
+<div>
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+  </tr>
+<% @userreqs.each do |userreq| %>
+  <tr>
+<td> <%=link_to(userreq.date, user_requisition_path(:id=>userreq.id,:week=>'1'))%>
+    <td><%= link_to 'Delete Requisition', userreq, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+</div>
+<%end%>
+<% if @user.technician?%>
+Select a date to view the requisitions for that date:
+<br />
+<br />
+<%i=1%>
+<table>
+<tr>
+<% @wb.each do |w| %>
+<td>
+<div>
+<%= link_to(w.date, user_techview_path(:date=>w.id),class: "btn btn-large btn-primary")%>
+</div>
+</td>
+<% if i%5==0%>
+</tr>
+<tr>
+<% end %>
+<% i+=1%>
+<% end %>
+
+<% end %>
+</table>

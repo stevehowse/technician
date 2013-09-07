@@ -1,0 +1,22 @@
+<h1>Listing userreqs</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @userreqs.each do |userreq| %>
+  <tr>
+<td> <%=Weekbg.where("id=?",userreq.weekbg_id).first %>
+  <td><%= link_to 'Show', userreq %></td>
+    <td><%= link_to 'Edit', edit_userreq_path(userreq) %></td>
+    <td><%= link_to 'Destroy', userreq, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Userreq', new_userreq_path %>

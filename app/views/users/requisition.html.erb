@@ -1,0 +1,65 @@
+<h1>Requisitions</h1>
+<b>Week Beginning: </b>
+<%= @weekbg.date %>
+<br/>
+<br/>
+<h5><%= link_to('Week 1', user_requisition_path(:id=>params[:id],:week=>'1'))%>
+<%= link_to('Week 2', user_requisition_path(:id=>params[:id],:week=>'2'))%></h5>
+
+<h2>Week <%=params[:week]%></h2>
+<table>
+<tr>
+<td id="timereqsmall"><b>Period</td>
+<td id="timereq"><b>Monday</b></td>
+<td id="timereq"><b>Tuesday</b></td>
+<td id="timereq"><b>Wednesday</b></td>
+<td id="timereq"><b>Thursday</b></td>
+<td id="timereq"><b>Friday</b></td>
+
+</tr>
+<tr>
+<td id="timereqsmall"> <b>Period 1<b></td>
+<%i=1%>
+<%j=1%>
+<%k=1%>
+<% @timetable.each do |t|%>
+<td id="timereq">
+<div style="font-size:11px; border-bottom:2px solid #000000;" >
+<b>Class:</b> <%= Schoolclass.where("id = ?",t.schoolclass_id).first.classname %>
+<b>Rm:</b> <%= Room.where("id = ?",t.room_id).first.roomname %>
+</div>
+<div>
+<%if Content.where("week=?",t.week).where("day=?",t.day).where("period=?",t.period).first.nil?%>
+<div style="border-bottom:2px solid #000000;">
+<b>Requisition: </b> 
+</div>
+<%=link_to('Enter a requisition', new_content_path(:weekbg_id=>@weekbg.id,:week=>t.week,:day=>t.day,:period=>t.period,:room_id=>t.room_id, :pupilnumber=>t.pupilnumber, :schoolclass=>t.schoolclass_id))%>
+<% else %>
+<% @content = Content.where("week=?",t.week).where("day=?",t.day).where("period=?",t.period).first %>
+<b>Requisition: 
+</b><%=truncate(@content.content, :length => 30) %>
+<br/>
+<div style="border-top:2px solid #000000;">
+<%=link_to('Edit Requisition', edit_content_path(@content.id))%>
+<% end%>
+</div>
+</div>
+
+</td>
+<%if i%5==0 %>
+</tr>
+
+<tr>
+<%j+=1%>
+<% if j!=6%>
+<td id="timereqsmall">
+<b>Period <%=j%></b>
+</td>
+<%end%>
+
+<%end%>
+<%i+=1%>
+
+<%end%>
+</table>
+

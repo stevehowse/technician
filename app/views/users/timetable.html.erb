@@ -1,0 +1,89 @@
+<%= form_for :timetables, :url => update_all_path, :html => { :method => :put } do %>
+<h1>Timetable</h1>
+<div id="center">
+<h5><%= link_to( 'Week 1', user_timetable_path(:week=>'1'))%>
+<%= link_to( 'Week 2', user_timetable_path(:week=>'2'))%></h5>
+</div>
+<br/>
+<br/>
+<%i=1%>
+<%j=2%>
+
+<table id="tablecenter">
+	<tr>
+		<td id="timereq">
+			Periods
+		</td>
+		<td id="timereq">
+			Monday
+		</td>
+		<td id="timereq">
+			Tuesday
+		</td>
+		<td id="timereq">
+			Wednesday
+		</td>
+		<td id="timereq">
+			Thursday
+		</td>
+		<td id="timereq">
+			Friday
+		</td>
+	</tr>
+	<tr>
+		<td id="timereq">
+			Period 1
+		</td>
+			<% @timetables.each do |timetable|%>
+			<%= fields_for "timetable[]", timetable do |builder| %>
+		<td id="timereq">
+			<table>
+				<tr>
+					<td>
+						<%=builder.label 'Room'%>
+					</td>
+					<td>
+					<div class="field">
+						<%= builder.collection_select(:room_id, Room.all,:id, :roomname, {},{:class=>"input-small"}) %>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<%=builder.label 'Class'%>
+					</td>
+					<td>
+						<%= builder.collection_select(:schoolclass_id, Schoolclass.all,:id, :classname, {},{:class=>"input-small"}) %>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<%=builder.label 'Pupils'%>
+					</td>
+					<td>
+						<%= builder.select(:pupilnumber, 1..35, {:prompt => "N/A"},{:class=>"input-small"})	 %>
+					</td>
+			
+				</tr>
+			</table>
+		</td>
+		<%if i%5==0 %>
+	</tr>
+	<tr>
+	<%if j!=6 %>
+		<td id="timereq">
+			Period <%=j%>
+		</td>
+		<%end%>
+		<%j+=1%>
+	<%end%>
+	<%i+=1%>
+	<%end%>
+	<%end%>
+</table>
+
+</br>
+<div id="center">
+	<%= submit_tag 'Save Changes', class: "btn btn-large btn-primary" %>
+</div>
+<%end%>

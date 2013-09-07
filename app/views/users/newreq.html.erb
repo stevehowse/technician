@@ -1,0 +1,20 @@
+<h1>Listing userreqs</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @userreqs.each do |userreq| %>
+  <tr>
+<td> <%=link_to(userreq.date, user_requisition_path(:id=>userreq.id,:week=>'1'))%>
+    <td><%= link_to 'Destroy', userreq, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Userreq', new_userreq_path %>

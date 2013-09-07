@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @content.user_id %>
+</p>
+
+<p>
+  <b>Weekbg:</b>
+  <%= @content.weekbg %>
+</p>
+
+<p>
+  <b>Week:</b>
+  <%= @content.week %>
+</p>
+
+<p>
+  <b>Day:</b>
+  <%= @content.day %>
+</p>
+
+<p>
+  <b>Period:</b>
+  <%= @content.period %>
+</p>
+
+<p>
+  <b>Room:</b>
+  <%= @content.room_id %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @content.content %>
+</p>
+
+
+<%= link_to 'Edit', edit_content_path(@content) %> |
+<%= link_to 'Back', contents_path %>
