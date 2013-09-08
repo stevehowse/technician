@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   def requisition
 	@user = current_user
 	@weekbg = Weekbg.find(params[:id])
-	@timetable = Timetable.where("user_id = ?", current_user.id).where("week = ?",params[:week]).all
+	@timetable = Timetable.where("user_id = ?", current_user.id).where("week = ?",params[:week]).order('id ASC').all
   end
   
   def newreq
