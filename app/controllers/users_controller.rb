@@ -52,7 +52,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
 	@u = current_user
-	@periods = @u.school
+	
     if @user.save
 	
 	timetables = Array.new
