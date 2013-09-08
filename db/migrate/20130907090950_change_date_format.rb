@@ -1,7 +1,7 @@
 class ChangeDateFormat < ActiveRecord::Migration
   def up
 rename_column :contents, :weekbg, :weekbg_id
-change_column :contents, :weekbg_id, :integer
+ALTER TABLE :contents ALTER COlUMN :weekbg_id TYPE :integer 
   end
 
   def down
