@@ -24,7 +24,7 @@
 <% @userreqs.each do |userreq| %>
   <tr>
 <td> <%=link_to(userreq.date, user_requisition_path(:id=>userreq.id,:week=>'1'))%>
-    <td>|<%= link_to 'Delete Requisition', userreq, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td>|<%= link_to 'Delete Requisition', @userreq(userreq.userreqs.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

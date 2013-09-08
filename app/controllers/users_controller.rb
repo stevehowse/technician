@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   def show
     @user = current_user
   @userreqs = @user.weekbgs.all
+  @userreqdelete = Userreq.all
 	if @user.id != current_user.id
 	redirect_to current_user
 	end
