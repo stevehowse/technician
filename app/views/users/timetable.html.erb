@@ -44,7 +44,7 @@
 					</td>
 					<td>
 					<div class="field">
-						<%= builder.collection_select(:room_id, Room.all,:id, :roomname, {},{:class=>"input-small"}) %>
+						<%= builder.collection_select(:room_id, Room.all,:id, :roomname, {:prompt => "N/A"},{:class=>"input-small"}) %>
 						</div>
 					</td>
 				</tr>
@@ -53,7 +53,7 @@
 						<%=builder.label 'Class'%>
 					</td>
 					<td>
-						<%= builder.collection_select(:schoolclass_id, Schoolclass.all,:id, :classname, {},{:class=>"input-small"}) %>
+						<%= builder.collection_select(:schoolclass_id, Schoolclass.all,:id, :classname, {:prompt => "N/A"},{:class=>"input-small"}) %>
 					</td>
 				</tr>
 				<tr>
@@ -61,7 +61,7 @@
 						<%=builder.label 'Pupils'%>
 					</td>
 					<td>
-						<%= builder.select(:pupilnumber, 1..35, {},{:class=>"input-small"})	 %>
+						<%= builder.select(:pupilnumber, 1..35, {:prompt => "N/A"},{:class=>"input-small"})	 %>
 					</td>
 			
 				</tr>

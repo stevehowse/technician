@@ -70,7 +70,7 @@ j=2
 	end
 @timetable = Timetable.create(timetables)
       sign_in @user
-      flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = "Welcome to Technician Organiser!"
       redirect_to @user
     else
       render 'new'

@@ -22,10 +22,8 @@
  </div>
  
  <div>
- Week <%=@week%>
- </div>
- <div>
- <%if @day=='1'%>
+ Week <%=@week%> | 
+<%if @day=='1'%>
  Monday 
  <% end%>
  <%if @day=='2'%>
@@ -40,14 +38,15 @@
  <%if @day=='5'%>
  Friday
  <% end%>
- </div>
- <div>
+  | 
  Period <%=@period%>
  </div>
-  <div class="field">
-    <%= f.label :room_id %><br />
-    <%= f.collection_select(:room_id, Room.all,:id ,:roomname, :selected =>@room) %>
+  <br />
+ <div class="field">
+<%= f.label :room_id%><br />
+    <%= f.collection_select(:room_id, Room.all,:id ,:roomname, {:selected =>@room}, {:class=>"input-small"}) %>
   </div>
+
   <div class="field">
     <%= f.label :content %><br />
     <%= f.text_area :content %>
