@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   
   def timetable 
     @user = current_user
-	@timetables = Timetable.where("user_id =?", current_user.id).where("week= ?",params[:week]).all
+	@timetables = Timetable.where("user_id =?", current_user.id).where("week= ?",params[:week]).order('id ASC').all
 	@periods = @user.school
 	@schoolclasses = Schoolclass.all
 	@rooms = Room.all
