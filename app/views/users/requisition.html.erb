@@ -25,8 +25,15 @@
 <% @timetable.each do |t|%>
 <td id="timereq">
 <div style="font-size:11px; border-bottom:2px solid #000000;" >
-<b>Class:</b> <%= Schoolclass.where("id = ?",t.schoolclass_id).first.classname %>
-<b>Rm:</b> <%= Room.where("id = ?",t.room_id).first.roomname %>
+<b>Class:</b>
+<%if Schoolclass.where("id = ?",t.schoolclass_id).first%>
+<%= Schoolclass.where("id = ?",t.schoolclass_id).first.classname %>
+<% end %>
+
+<b>Rm:</b> 
+<% if Room.where("id = ?",t.room_id).first%>
+<%= Room.where("id = ?",t.room_id).first.roomname %>
+<%end%>
 </div>
 <div>
 <%if Content.where("weekbg_id=?", @weekbg.id).where("week=?",t.week).where("day=?",t.day).where("period=?",t.period).first.nil?%>
