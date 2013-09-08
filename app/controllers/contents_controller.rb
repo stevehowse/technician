@@ -31,6 +31,7 @@ class ContentsController < ApplicationController
 	@period = params[:period]
 	@room = params[:room_id]
 	@schoolclass =params[:schoolclass]
+	@thisclass = Schoolclass.find(params[:schoolclass])
 	@pupilnumber = params[:pupilnumber]
     respond_to do |format|
       format.html # new.html.erb

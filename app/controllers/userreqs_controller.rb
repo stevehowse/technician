@@ -78,7 +78,7 @@ class UserreqsController < ApplicationController
     @userreq.destroy
 
     respond_to do |format|
-      format.html { redirect_to userreqs_url }
+      format.html { redirect_to current_user }
       format.json { head :no_content }
     end
   end
