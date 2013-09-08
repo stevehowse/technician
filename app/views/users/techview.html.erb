@@ -45,9 +45,9 @@ Friday <%=p%>
 
 
 
-<% if Content.where("day =?",'d').where("period= ?",p).where("room_id =?",room.id).where("weekbg_id = ?", @weekbg.id).first.nil?%>
+<% if Content.where("day =?",d.to_s).where("period= ?",p).where("room_id =?",room.id).where("weekbg_id = ?", @weekbg.id).first.nil?%>
 <%else%>
-<%@content = Content.where("day =?",'d').where("period= ?",p).where("room_id =?",room.id).where("weekbg_id = ?", @weekbg.id).first%>
+<%@content = Content.where("day =?",d.to_s).where("period= ?",p).where("room_id =?",room.id).where("weekbg_id = ?", @weekbg.id).first%>
 <% if @content.created_at.to_datetime < @weekbg.date.to_date-4.days-10.hours && @content.updated_at.to_datetime < @weekbg.date.to_date-4.days-10.hours%>
 <p style="font-size:11px; color:#1D5C08;">
 <% else if @content.created_at.to_datetime < @weekbg.date.to_date-4.days-10.hours && @content.updated_at.to_datetime > @weekbg.date.to_date-4.days-10.hours%>
