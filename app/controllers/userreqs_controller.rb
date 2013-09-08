@@ -47,7 +47,7 @@ class UserreqsController < ApplicationController
     respond_to do |format|
       if @userreq.save
         format.html { redirect_to user_requisition_path(:id=>@userreq.id,:week=>'1'), notice: 'Userreq was successfully created.' }
-        format.json { render json: @userreq, status: :created, location: @userreq }
+        format.json { render json: user_requisition_path(:id=>@userreq.id,:week=>'1'), status: :created, location: @userreq }
       else
         format.html { render action: "new" }
         format.json { render json: @userreq.errors, status: :unprocessable_entity }
